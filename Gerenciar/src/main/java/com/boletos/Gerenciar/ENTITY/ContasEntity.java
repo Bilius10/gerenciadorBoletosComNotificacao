@@ -3,12 +3,18 @@ package com.boletos.Gerenciar.ENTITY;
 import com.boletos.Gerenciar.ENUM.tipoConta;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "contas")
-public class ContasEntity {
+public class ContasEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     private UUID idContas;
     private String nome;
@@ -19,7 +25,8 @@ public class ContasEntity {
     @Enumerated(EnumType.STRING)
     private tipoConta tipoConta;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioEntity usuario;
     private boolean ativo;
 
@@ -36,6 +43,7 @@ public class ContasEntity {
     }
 
     public ContasEntity() {
+        this.ativo = true;
     }
 
     public String getNome() {

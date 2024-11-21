@@ -6,29 +6,28 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "login")
-public class LoginEntity implements UserDetails {
+public class LoginEntity implements UserDetails, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long idLogin;
     private String nome;
     private String senha;
 
-    public com.boletos.Gerenciar.ENUM.nivelGerencimento getNivelGerencimento() {
-        return nivelGerencimento;
-    }
-
-    public void setNivelGerencimento(com.boletos.Gerenciar.ENUM.nivelGerencimento nivelGerencimento) {
-        this.nivelGerencimento = nivelGerencimento;
-    }
-
     @Enumerated(EnumType.STRING)
     private nivelGerencimento nivelGerencimento;
 
     @OneToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
     private UsuarioEntity usuario;
 
     private boolean accountNonExpired;
@@ -51,6 +50,15 @@ public class LoginEntity implements UserDetails {
         this.credentialsNonExpired = true;
         this.nivelGerencimento = com.boletos.Gerenciar.ENUM.nivelGerencimento.PAGADOR;
     }
+
+    public com.boletos.Gerenciar.ENUM.nivelGerencimento getNivelGerencimento() {
+        return nivelGerencimento;
+    }
+
+    public void setNivelGerencimento(com.boletos.Gerenciar.ENUM.nivelGerencimento nivelGerencimento) {
+        this.nivelGerencimento = nivelGerencimento;
+    }
+
 
     public String getNome() {
         return nome;

@@ -1,12 +1,20 @@
 package com.boletos.Gerenciar.ENTITY;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity {
+public class UsuarioEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID idUsuario;
@@ -14,6 +22,14 @@ public class UsuarioEntity {
     private String email;
     private String telefone;
     private boolean status;
+
+    @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
+    private LoginEntity loginEntity;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<ContasEntity> contas;
 
     public UsuarioEntity(UUID idUsuario, String nome, String email, String telefone, boolean status) {
         this.idUsuario = idUsuario;
@@ -24,6 +40,7 @@ public class UsuarioEntity {
     }
 
     public UsuarioEntity() {
+        this.status = true;
     }
 
     public String getNome() {
@@ -64,5 +81,21 @@ public class UsuarioEntity {
 
     public UUID getIdUsuario() {
         return idUsuario;
+    }
+
+    public LoginEntity getLoginEntity() {
+        return loginEntity;
+    }
+
+    public void setLoginEntity(LoginEntity loginEntity) {
+        this.loginEntity = loginEntity;
+    }
+
+    public List<ContasEntity> getContas() {
+        return contas;
+    }
+
+    public void setContas(List<ContasEntity> contas) {
+        this.contas = contas;
     }
 }

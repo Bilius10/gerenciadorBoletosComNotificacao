@@ -9,5 +9,5 @@ public class GerenciarApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GerenciarApplication.class, args);
 	}
-
+	//arrumar o banco de dados, tente fazer um registro e entendera
 }
