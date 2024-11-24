@@ -7,14 +7,12 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "email")
 public class EmailEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID userId;
     private String emailTo;
     private String subject;

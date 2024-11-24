@@ -16,6 +16,8 @@ public class ContasEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idConta")
     private UUID idContas;
     private String nome;
     private double valor;
@@ -26,7 +28,7 @@ public class ContasEntity implements Serializable {
     private tipoConta tipoConta;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "idUsuario_usuario", nullable = false)
     private UsuarioEntity usuario;
     private boolean ativo;
 

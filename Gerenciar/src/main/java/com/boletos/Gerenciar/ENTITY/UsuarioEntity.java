@@ -13,10 +13,11 @@ import java.util.UUID;
 public class UsuarioEntity implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idUsuario;
     private String nome;
     private String email;
@@ -65,6 +66,7 @@ public class UsuarioEntity implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+
     }
 
     public boolean isStatus() {
@@ -97,5 +99,18 @@ public class UsuarioEntity implements Serializable {
 
     public void setContas(List<ContasEntity> contas) {
         this.contas = contas;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioEntity{" +
+                "idUsuario=" + idUsuario +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", status=" + status +
+                ", loginEntity=" + loginEntity +
+                ", contas=" + contas +
+                '}';
     }
 }

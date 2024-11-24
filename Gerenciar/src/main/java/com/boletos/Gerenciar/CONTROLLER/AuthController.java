@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,15 +23,15 @@ public class AuthController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/registro")
-    public ResponseEntity<String> registro(@Valid RegistroDTO registroDTO){
+    @PostMapping("/registry")
+    public ResponseEntity<String> registro(@RequestBody @Valid RegistroDTO registroDTO){
 
         LoginEntity loginTransfer = new LoginEntity();
-        BeanUtils.copyProperties(registroDTO, loginTransfer, "nome", "senha");
+        BeanUtils.copyProperties(registroDTO, loginTransfer, "email", "telefone");
         UsuarioEntity usuarioTransfer = new UsuarioEntity();
-        BeanUtils.copyProperties(registroDTO, usuarioTransfer, "nome", "email", "senha");
+        BeanUtils.copyProperties(registroDTO, usuarioTransfer, "senha");
 
-         Optional<LoginEntity> loginConfirmacao = loginService.registro(loginTransfer, usuarioTransfer);
+        Optional<LoginEntity> loginConfirmacao = loginService.registro(loginTransfer, usuarioTransfer);
 
          if(loginConfirmacao.isEmpty()){
              return ResponseEntity.badRequest().body("Já existe um usuario com esse nome");

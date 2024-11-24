@@ -10,16 +10,19 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "login")
 public class LoginEntity implements UserDetails, Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
 
     @Id
-    private Long idLogin;
+    @Column(name = "idLogin")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID idLogin;
     private String nome;
     private String senha;
 
@@ -27,7 +30,7 @@ public class LoginEntity implements UserDetails, Serializable {
     private nivelGerencimento nivelGerencimento;
 
     @OneToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "idUsuario_usuario", nullable = false)
     private UsuarioEntity usuario;
 
     private boolean accountNonExpired;
@@ -35,7 +38,7 @@ public class LoginEntity implements UserDetails, Serializable {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public LoginEntity(Long idLogin, String nome, String senha, UsuarioEntity usuario) {
+    public LoginEntity(UUID idLogin, String nome, String senha, UsuarioEntity usuario) {
         this.idLogin = idLogin;
         this.nome = nome;
         this.senha = senha;
@@ -143,11 +146,26 @@ public class LoginEntity implements UserDetails, Serializable {
         return enabled;
     }
 
-    public void setIdLogin(Long idLogin) {
+    public void setIdLogin(UUID idLogin) {
         this.idLogin = idLogin;
     }
 
-    public Long getIdLogin() {
+    public UUID getIdLogin() {
         return idLogin;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginEntity{" +
+                "idLogin=" + idLogin +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", nivelGerencimento=" + nivelGerencimento +
+                ", usuario=" + usuario +
+                ", accountNonExpired=" + accountNonExpired +
+                ", accountNonLocked=" + accountNonLocked +
+                ", credentialsNonExpired=" + credentialsNonExpired +
+                ", enabled=" + enabled +
+                '}';
     }
 }
