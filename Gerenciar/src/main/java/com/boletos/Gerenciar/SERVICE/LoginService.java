@@ -8,6 +8,7 @@ import com.boletos.Gerenciar.REPOSITORY.LoginRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class LoginService {
 
     public Optional<LoginEntity> registro(LoginEntity loginEntity, UsuarioEntity usuarioEntity){
 
-        Optional<UsuarioEntity> existeEsseNome = usuarioRepository.findByNome(usuarioEntity.getNome());
+        Optional<LoginEntity> existeEsseNome = loginRepository.findByNome(loginEntity.getNome());
 
         if(existeEsseNome.isPresent()){
             return Optional.empty();
@@ -50,5 +51,31 @@ public class LoginService {
 
         emailProducer.publishWelComeMessage(usuarioEntity);
         return Optional.of(loginRepository.save(loginEntity));
+    }
+
+    public Optional<LoginEntity> login(LoginEntity loginEntity){
+
+        Optional<LoginEntity> existeEsseLogin = loginRepository.findByNome(loginEntity.getNome());
+
+        BCryptPasswordEncoder compare = new BCryptPasswordEncoder();
+        if(existeEsseLogin.isEmpty() || !compare.matches(loginEntity.getSenha(), existeEsseLogin.get().getSenha())){
+
+            return existeEsseLogin;
+        }
+
+        Optional<UsuarioEntity> usuarioParaEnviarEmail = usuarioRepository.findByNome(existeEsseLogin.get().getUsuario().getNome());
+
+
+        if(usuarioParaEnviarEmail.isPresent()) {
+
+            var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginEntity.getNome(), loginEntity.getSenha());
+            var auth = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+            var token = tokenService.generateToken((LoginEntity) auth.getPrincipal());
+
+            emailProducer.publishCodeForLogin(usuarioParaEnviarEmail.get(), token);
+        }
+
+        return existeEsseLogin;
+
     }
 }

@@ -28,5 +28,15 @@ public class EmailProducer {
         rabbitTemplate.convertAndSend("", routingKey, emailDto);
     }
 
+    public void publishCodeForLogin(UsuarioEntity usuario, String token){
+        var emailDto = new EmailEntity();
+        emailDto.setUserId(usuario.getIdUsuario());
+        emailDto.setEmailTo(usuario.getEmail());
+        emailDto.setSubject("Codigo para login");
+        emailDto.setText(token);
+
+        rabbitTemplate.convertAndSend("", routingKey, emailDto);
+    }
+
 
 }

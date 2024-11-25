@@ -1,5 +1,6 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
+import com.boletos.Gerenciar.DTO.LoginDTO;
 import com.boletos.Gerenciar.DTO.RegistroDTO;
 import com.boletos.Gerenciar.ENTITY.LoginEntity;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
@@ -38,5 +39,20 @@ public class AuthController {
          }
 
          return ResponseEntity.status(HttpStatus.CREATED).body("Verifique seu email");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginDTO loginDTO){
+        LoginEntity loginRecebendo = new LoginEntity();
+        BeanUtils.copyProperties(loginDTO, loginRecebendo);
+
+        Optional<LoginEntity> loginConfirmacao = loginService.login(loginRecebendo);
+
+        if(loginConfirmacao.isEmpty()){
+            return ResponseEntity.badRequest().body("Usuario ou senha incorretados");
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Verifique seu email");
+
     }
 }

@@ -14,7 +14,7 @@ public class EmailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idEmail;
-    private UUID idUsuario;
+    private UUID userId;
     private String emailFrom;
     private String emailTo;
     private String subject;
@@ -33,11 +33,11 @@ public class EmailEntity {
     }
 
     public UUID getIdUsuario() {
-        return idUsuario;
+        return userId;
     }
 
     public void setIdUsuario(UUID idUsuario) {
-        this.idUsuario = idUsuario;
+        this.userId = idUsuario;
     }
 
     public String getEmailFrom() {
