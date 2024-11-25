@@ -108,11 +108,11 @@ public class LoginEntity implements UserDetails, Serializable {
 
         if(this.nivelGerencimento == com.boletos.Gerenciar.ENUM.nivelGerencimento.GERENTE) {
             return List.of(new SimpleGrantedAuthority(
-                    "GERENTE"), new SimpleGrantedAuthority("COBRADOR"), new SimpleGrantedAuthority("PAGADOR"));
+                    "ROLE_GERENTE"), new SimpleGrantedAuthority("ROLE_COBRADOR"), new SimpleGrantedAuthority("ROLE_PAGADOR"));
         }else if(this.nivelGerencimento == com.boletos.Gerenciar.ENUM.nivelGerencimento.COBRADOR){
-            return List.of(new SimpleGrantedAuthority("COBRADOR"), new SimpleGrantedAuthority("PAGADOR"));
+            return List.of(new SimpleGrantedAuthority("ROLE_COBRADOR"), new SimpleGrantedAuthority("ROLE_PAGADOR"));
         }else{
-            return List.of(new SimpleGrantedAuthority("PAGADOR"));
+            return List.of(new SimpleGrantedAuthority("ROLE_PAGADOR"));
         }
     }
 

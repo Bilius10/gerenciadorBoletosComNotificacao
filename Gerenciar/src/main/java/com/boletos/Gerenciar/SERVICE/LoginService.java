@@ -57,12 +57,18 @@ public class LoginService {
 
         Optional<LoginEntity> existeEsseLogin = loginRepository.findByNome(loginEntity.getNome());
 
-        BCryptPasswordEncoder compare = new BCryptPasswordEncoder();
-        if(existeEsseLogin.isEmpty() || !compare.matches(loginEntity.getSenha(), existeEsseLogin.get().getSenha())){
+        if (existeEsseLogin.isEmpty()) {
 
-            return existeEsseLogin;
+            return Optional.empty();
         }
 
+        LoginEntity loginExistente = existeEsseLogin.get();
+        BCryptPasswordEncoder compare = new BCryptPasswordEncoder();
+
+
+        if (!compare.matches(loginEntity.getSenha(), loginExistente.getSenha())) {
+            return Optional.empty();
+        }
         Optional<UsuarioEntity> usuarioParaEnviarEmail = usuarioRepository.findByNome(existeEsseLogin.get().getUsuario().getNome());
 
 
