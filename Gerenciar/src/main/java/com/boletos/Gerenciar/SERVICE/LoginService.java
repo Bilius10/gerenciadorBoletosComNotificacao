@@ -77,7 +77,7 @@ public class LoginService {
             var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginEntity.getNome(), loginEntity.getSenha());
             var auth = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
             var token = tokenService.generateToken((LoginEntity) auth.getPrincipal());
-
+            System.out.println(token);
             emailProducer.publishCodeForLogin(usuarioParaEnviarEmail.get(), token);
         }
 

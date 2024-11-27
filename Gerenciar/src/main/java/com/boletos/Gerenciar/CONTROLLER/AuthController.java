@@ -2,6 +2,7 @@ package com.boletos.Gerenciar.CONTROLLER;
 
 import com.boletos.Gerenciar.DTO.LoginDTO;
 import com.boletos.Gerenciar.DTO.RegistroDTO;
+import com.boletos.Gerenciar.ENTITY.ContasEntity;
 import com.boletos.Gerenciar.ENTITY.LoginEntity;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
 import com.boletos.Gerenciar.SERVICE.LoginService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -53,5 +55,6 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Verifique seu email");
 
     }
+
 
 }
