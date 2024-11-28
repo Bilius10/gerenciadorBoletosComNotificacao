@@ -34,6 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/auth/registry").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user").hasRole("GERENTE")
+                        .requestMatchers(HttpMethod.GET, "/user/{id}").hasRole("COBRADOR")
                         .requestMatchers(HttpMethod.PUT, "/user").hasRole("GERENTE")
                         .requestMatchers(HttpMethod.DELETE, "/user/{id}").hasRole("GERENTE")
                         .requestMatchers(HttpMethod.GET, "/user/contas/{id}").hasRole("COBRADOR")

@@ -1,7 +1,6 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
 import com.boletos.Gerenciar.DTO.EditUserDTO;
-import com.boletos.Gerenciar.DTO.RegistroDTO;
 import com.boletos.Gerenciar.ENTITY.ContasEntity;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
 import com.boletos.Gerenciar.SERVICE.UsuarioService;
