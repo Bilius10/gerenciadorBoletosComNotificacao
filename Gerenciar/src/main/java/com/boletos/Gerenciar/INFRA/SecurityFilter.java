@@ -1,4 +1,4 @@
-package com.boletos.Gerenciar.INFRASECURITY;
+package com.boletos.Gerenciar.INFRA;
 
 import com.boletos.Gerenciar.REPOSITORY.LoginRepository;
 import jakarta.servlet.FilterChain;
