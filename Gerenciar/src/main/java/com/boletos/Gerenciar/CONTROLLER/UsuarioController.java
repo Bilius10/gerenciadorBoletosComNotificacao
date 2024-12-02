@@ -1,7 +1,7 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
 import com.boletos.Gerenciar.DTO.EditUserDTO;
-import com.boletos.Gerenciar.ENTITY.ContasEntity;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
 import com.boletos.Gerenciar.SERVICE.UsuarioService;
 import org.springframework.beans.BeanUtils;
@@ -28,7 +28,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarUsuario(@PathVariable UUID id){
+    public ResponseEntity<Object> buscarUsuario(@PathVariable int id){
 
         Optional<UsuarioEntity> usuarioExiste = usuarioService.buscarUsuario(id);
 
@@ -56,7 +56,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUsuario(@PathVariable UUID id){
+    public ResponseEntity<String> deleteUsuario(@PathVariable int id){
 
         Optional<UsuarioEntity> usuarioExcluido = usuarioService.deleteUsuario(id);
 
@@ -67,8 +67,8 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido");
     }
 
-    @GetMapping("/contas/{id}")
-    private ResponseEntity<List<ContasEntity>> contasUsuario(@PathVariable UUID id){
+    @GetMapping("/fatura/{id}")
+    private ResponseEntity<List<Fatura>> contasUsuario(@PathVariable int id){
 
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.contasUsuario(id));
     }

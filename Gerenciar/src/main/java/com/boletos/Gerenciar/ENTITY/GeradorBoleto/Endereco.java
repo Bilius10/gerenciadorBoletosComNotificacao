@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idEndereco;
+    private int idEndereco;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -28,7 +28,7 @@ public class Endereco {
     @UpdateTimestamp
     private LocalDateTime atualizado;
 
-    public Endereco(UUID idEndereco, String logradouro, String numero, String complemento,
+    public Endereco(int idEndereco, String logradouro, String numero, String complemento,
                     String bairro, String cidade, String uf, String cep, LocalDateTime criado, LocalDateTime atualizado) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
@@ -118,11 +118,11 @@ public class Endereco {
         this.atualizado = atualizado;
     }
 
-    public void setIdEndereco(UUID idEndereco) {
+    public void setIdEndereco(int idEndereco) {
         this.idEndereco = idEndereco;
     }
 
-    public UUID getIdEndereco() {
+    public int getIdEndereco() {
         return idEndereco;
     }
 }

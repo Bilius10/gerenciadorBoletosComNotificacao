@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Fatura {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idFatura;
+    private int idFatura;
     private BigDecimal valor;
     private LocalDate dataVencimento;
 
@@ -45,7 +45,7 @@ public class Fatura {
     @JoinColumn(name = "idConvenio_Convenio", nullable = false)
     private Convenio convenio;
 
-    public Fatura(UUID idFatura, BigDecimal valor, LocalDate dataVencimento, TipoPagamento tipoPagamento, SituacaoPagamento situacaoPagamento, String numeroDocumento, String nossoNumero,
+    public Fatura(int idFatura, BigDecimal valor, LocalDate dataVencimento, TipoPagamento tipoPagamento, SituacaoPagamento situacaoPagamento, String numeroDocumento, String nossoNumero,
                   LocalDateTime criado, LocalDateTime atualizado, Conta conta, UsuarioEntity usuarioEntity, Convenio convenio) {
         this.idFatura = idFatura;
         this.valor = valor;
@@ -64,11 +64,11 @@ public class Fatura {
     public Fatura() {
     }
 
-    public UUID getIdFatura() {
+    public int getIdFatura() {
         return idFatura;
     }
 
-    public void setIdFatura(UUID idFatura) {
+    public void setIdFatura(int idFatura) {
         this.idFatura = idFatura;
     }
 

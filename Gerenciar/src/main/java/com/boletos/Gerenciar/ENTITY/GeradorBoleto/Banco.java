@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Banco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idBanco;
+    private int idBanco;
     private String codigo;
     private String nome;
     @CreationTimestamp
@@ -22,7 +22,7 @@ public class Banco {
     @UpdateTimestamp
     private LocalDateTime atualizado;
 
-    public Banco(UUID idBanco, String codigo, String nome, LocalDateTime criado, LocalDateTime atualizado) {
+    public Banco(int idBanco, String codigo, String nome, LocalDateTime criado, LocalDateTime atualizado) {
         this.idBanco = idBanco;
         this.codigo = codigo;
         this.nome = nome;
@@ -66,11 +66,11 @@ public class Banco {
         this.atualizado = atualizado;
     }
 
-    public void setIdBanco(UUID idBanco) {
+    public void setIdBanco(int idBanco) {
         this.idBanco = idBanco;
     }
 
-    public UUID getIdBanco() {
+    public int getIdBanco() {
         return idBanco;
     }
 }

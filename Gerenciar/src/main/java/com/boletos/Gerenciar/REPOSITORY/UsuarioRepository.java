@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID> {
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
 
     @Query("select u from UsuarioEntity u where u.nome = :nome")
     Optional<UsuarioEntity> findByNome(String nome);

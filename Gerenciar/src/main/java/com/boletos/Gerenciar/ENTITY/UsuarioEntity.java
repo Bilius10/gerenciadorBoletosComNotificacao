@@ -1,5 +1,6 @@
 package com.boletos.Gerenciar.ENTITY;
 
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -18,7 +19,7 @@ public class UsuarioEntity implements Serializable {
     @Id
     @Column(name = "idUsuario")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idUsuario;
+    private int idUsuario;
     private String nome;
     private String email;
     private String telefone;
@@ -30,9 +31,9 @@ public class UsuarioEntity implements Serializable {
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
-    private List<ContasEntity> contas;
+    private List<Fatura> faturas;
 
-    public UsuarioEntity(UUID idUsuario, String nome, String email, String telefone, boolean status) {
+    public UsuarioEntity(int idUsuario, String nome, String email, String telefone, boolean status) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -77,11 +78,11 @@ public class UsuarioEntity implements Serializable {
         this.status = status;
     }
 
-    public void setIdUsuario(UUID idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public UUID getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
@@ -93,12 +94,12 @@ public class UsuarioEntity implements Serializable {
         this.loginEntity = loginEntity;
     }
 
-    public List<ContasEntity> getContas() {
-        return contas;
+    public List<Fatura> getContas() {
+        return faturas;
     }
 
-    public void setContas(List<ContasEntity> contas) {
-        this.contas = contas;
+    public void setFaturas(List<Fatura> contas) {
+        this.faturas = contas;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class UsuarioEntity implements Serializable {
                 ", telefone='" + telefone + '\'' +
                 ", status=" + status +
                 ", loginEntity=" + loginEntity +
-                ", contas=" + contas +
+                ", faturas=" + faturas +
                 '}';
     }
 }

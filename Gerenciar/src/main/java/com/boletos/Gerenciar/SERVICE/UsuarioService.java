@@ -1,8 +1,8 @@
 package com.boletos.Gerenciar.SERVICE;
 
-import com.boletos.Gerenciar.ENTITY.ContasEntity;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
-import com.boletos.Gerenciar.REPOSITORY.ContasRepository;
+import com.boletos.Gerenciar.REPOSITORY.FaturaRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,14 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private ContasRepository contasRepository;
+    private FaturaRepository contasRepository;
 
     public List<UsuarioEntity> buscarTodosUsuarios(){
 
         return usuarioRepository.findAll();
     }
 
-    public Optional<UsuarioEntity> buscarUsuario(UUID id){
+    public Optional<UsuarioEntity> buscarUsuario(int id){
 
         return usuarioRepository.findById(id);
 
@@ -42,7 +42,7 @@ public class UsuarioService {
         return Optional.of(usuarioRepository.save(usuarioEntity));
     }
 
-    public Optional<UsuarioEntity> deleteUsuario(UUID id){
+    public Optional<UsuarioEntity> deleteUsuario(int id){
         Optional<UsuarioEntity> usuarioExiste = usuarioRepository.findById(id);
 
         if(usuarioExiste.isPresent()){
@@ -52,7 +52,7 @@ public class UsuarioService {
         return usuarioExiste;
     }
 
-    public List<ContasEntity> contasUsuario(UUID id){
+    public List<Fatura> contasUsuario(int id){
 
         return contasRepository.findByUsuario(id);
     }

@@ -13,13 +13,12 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idEmpresa;
+    private int idEmpresa;
     private String razaoSocial;
     private String cnpj;
 
     @OneToOne
     @JoinColumn(name = "idEndereco_Endereco", nullable = false)
-
     private Endereco endereco;
 
     @CreationTimestamp
@@ -27,7 +26,7 @@ public class Empresa {
     @UpdateTimestamp
     private LocalDateTime atualizado;
 
-    public Empresa(UUID idEmpresa, String razaoSocial, String cnpj, Endereco endereco, LocalDateTime criado, LocalDateTime atualizado) {
+    public Empresa(int idEmpresa, String razaoSocial, String cnpj, Endereco endereco, LocalDateTime criado, LocalDateTime atualizado) {
         this.idEmpresa = idEmpresa;
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
@@ -79,11 +78,11 @@ public class Empresa {
         this.atualizado = atualizado;
     }
 
-    public void setIdEmpresa(UUID idEmpresa) {
+    public void setIdEmpresa(int idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
-    public UUID getIdEmpresa() {
+    public int getIdEmpresa() {
         return idEmpresa;
     }
 }

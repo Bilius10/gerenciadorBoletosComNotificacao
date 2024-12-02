@@ -13,7 +13,7 @@ public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idConta;
+    private int idConta;
     private String agencia;
     private String conta;
     private String digitoAgencia;
@@ -32,7 +32,7 @@ public class Conta {
     @JoinColumn(name = "idEmpresa_Empresa", nullable = false)
     private Empresa empresa;
 
-    public Conta(UUID idConta, String agencia, String conta, String digitoAgencia,
+    public Conta(int idConta, String agencia, String conta, String digitoAgencia,
                  String digitoConta, LocalDateTime criado, LocalDateTime atualizado, Banco banco, Empresa empresa) {
         this.idConta = idConta;
         this.agencia = agencia;
@@ -112,11 +112,11 @@ public class Conta {
         this.empresa = empresa;
     }
 
-    public void setIdConta(UUID idConta) {
+    public void setIdConta(int idConta) {
         this.idConta = idConta;
     }
 
-    public UUID getIdConta() {
+    public int getIdConta() {
         return idConta;
     }
 }

@@ -1,8 +1,8 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
 import com.boletos.Gerenciar.DTO.EditContaDTO;
-import com.boletos.Gerenciar.ENTITY.ContasEntity;
-import com.boletos.Gerenciar.SERVICE.ContasService;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
+import com.boletos.Gerenciar.SERVICE.FaturaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,20 +15,20 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/contas")
-public class ContasController {
+public class FaturaController {
 
     @Autowired
-    private ContasService contasService;
+    private FaturaService faturaService;
 
     @GetMapping
-    public ResponseEntity<List<ContasEntity>> buscarTodasContas(){
-        return ResponseEntity.status(HttpStatus.OK).body(contasService.buscarTodasContas());
+    public ResponseEntity<List<Fatura>> buscarTodasContas(){
+        return ResponseEntity.status(HttpStatus.OK).body(faturaService.buscarTodasContas());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Object> buscarConta(@PathVariable UUID id){
+    public ResponseEntity<Object> buscarConta(@PathVariable int id){
 
-        Optional<ContasEntity> contaBuscada = contasService.buscarConta(id);
+        Optional<Fatura> contaBuscada = faturaService.buscarConta(id);
 
         if(contaBuscada.isEmpty()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não encontrada");
@@ -38,9 +38,9 @@ public class ContasController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deletarConta(@PathVariable UUID id){
+    public ResponseEntity<String> deletarConta(@PathVariable int id){
 
-        Optional<ContasEntity> contaDeletada = contasService.deletarConta(id);
+        Optional<Fatura> contaDeletada = faturaService.deletarConta(id);
 
         if(contaDeletada.isEmpty()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não encontrada");
@@ -49,14 +49,5 @@ public class ContasController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Conta excluida");
     }
 
-    @PutMapping
-    private ResponseEntity<Object> editarConta(@RequestBody EditContaDTO editContaDTO){
 
-        ContasEntity contaRecebida = new ContasEntity();
-
-        BeanUtils.copyProperties(editContaDTO, contaRecebida);
-
-
-
-    }
 }

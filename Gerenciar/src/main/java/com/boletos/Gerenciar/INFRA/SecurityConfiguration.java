@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/user/{id}").hasRole("COBRADOR")
                         .requestMatchers(HttpMethod.PUT, "/user").hasRole("GERENTE")
                         .requestMatchers(HttpMethod.DELETE, "/user/{id}").hasRole("GERENTE")
-                        .requestMatchers(HttpMethod.GET, "/user/contas/{id}").hasRole("COBRADOR")
+                        .requestMatchers(HttpMethod.GET, "/user/fatura/{id}").hasRole("COBRADOR")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

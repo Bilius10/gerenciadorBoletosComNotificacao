@@ -13,16 +13,26 @@ public class EmailEntity implements Serializable {
     private static final long serialVersionUID = 2L;
 
     @Id
-    private UUID userId;
+    private int userId;
     private String emailTo;
     private String subject;
     private String text;
 
-    public UUID getUserId() {
+    public EmailEntity(int userId, String emailTo, String subject, String text) {
+        this.userId = userId;
+        this.emailTo = emailTo;
+        this.subject = subject;
+        this.text = text;
+    }
+
+    public EmailEntity() {
+    }
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

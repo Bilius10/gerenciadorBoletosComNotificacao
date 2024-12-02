@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface LoginRepository extends JpaRepository<LoginEntity, UUID> {
+public interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
 
 
     @Query("SELECT l FROM LoginEntity l WHERE l.nome = :name")

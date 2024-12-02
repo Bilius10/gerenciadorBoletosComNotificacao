@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 public class Convenio {
     @Id
-    private UUID idConvenio;
+    private int idConvenio;
     private String numeroContrato;
     private String carteira;
     private String variacaoCarteira;
@@ -30,7 +30,7 @@ public class Convenio {
     @UpdateTimestamp
     private LocalDateTime atualizado;
 
-    public Convenio(UUID idConvenio, String numeroContrato, String carteira, String variacaoCarteira,
+    public Convenio(int idConvenio, String numeroContrato, String carteira, String variacaoCarteira,
                     BigDecimal jurosPorcentagem, BigDecimal multaPorcentagem, Conta conta, LocalDateTime criado, LocalDateTime atualizado) {
         this.idConvenio = idConvenio;
         this.numeroContrato = numeroContrato;
@@ -110,11 +110,11 @@ public class Convenio {
         this.atualizado = atualizado;
     }
 
-    public void setIdConvenio(UUID idConvenio) {
+    public void setIdConvenio(int idConvenio) {
         this.idConvenio = idConvenio;
     }
 
-    public UUID getIdConvenio() {
+    public int getIdConvenio() {
         return idConvenio;
     }
 

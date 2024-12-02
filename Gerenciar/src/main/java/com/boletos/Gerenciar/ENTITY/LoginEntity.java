@@ -22,7 +22,7 @@ public class LoginEntity implements UserDetails, Serializable {
     @Id
     @Column(name = "idLogin")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idLogin;
+    private int idLogin;
     private String nome;
     private String senha;
 
@@ -38,7 +38,7 @@ public class LoginEntity implements UserDetails, Serializable {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public LoginEntity(UUID idLogin, String nome, String senha, UsuarioEntity usuario) {
+    public LoginEntity(int idLogin, String nome, String senha, UsuarioEntity usuario) {
         this.idLogin = idLogin;
         this.nome = nome;
         this.senha = senha;
@@ -146,11 +146,11 @@ public class LoginEntity implements UserDetails, Serializable {
         return enabled;
     }
 
-    public void setIdLogin(UUID idLogin) {
+    public void setIdLogin(int idLogin) {
         this.idLogin = idLogin;
     }
 
-    public UUID getIdLogin() {
+    public int getIdLogin() {
         return idLogin;
     }
 
