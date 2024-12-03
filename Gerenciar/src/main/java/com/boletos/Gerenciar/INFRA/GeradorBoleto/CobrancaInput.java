@@ -1,4 +1,4 @@
-package com.boletos.Gerenciar.INFRA;
+package com.boletos.Gerenciar.INFRA.GeradorBoleto;
 
 import java.math.BigDecimal;
 
@@ -25,6 +25,10 @@ public class CobrancaInput {
     private String numeroTituloCliente;
     private String textoMensagemBloqueioOcorrencia;
     private String indicadorPix;
+    private DescontoInput desconto;
+    private JurosInput jurosMora;
+    private MultaInput multa;
+    private PagadorInput pagador;
 
     public CobrancaInput(Long numeroConvenio, Integer numeroCarteira, Integer numeroVariacaoCarteira, Integer codigoModalidade,
                          String dataEmissao, String dataVencimento, BigDecimal valorOriginal, String valorAbatimento,
@@ -32,7 +36,7 @@ public class CobrancaInput {
                          Integer numeroDiasLimiteRecebimento, char codigoAceite, Integer codigoTipoTitulo, String descricaoTipoTitulo,
                          String indicadorPermissaoRecebimentoParcial, String numeroTituloBeneficiario,
                          String campoUtilizacaoBeneficiario, String numeroTituloCliente, String textoMensagemBloqueioOcorrencia,
-                         String indicadorPix) {
+                         String indicadorPix, DescontoInput desconto, JurosInput jurosMora, MultaInput multa, PagadorInput pagador) {
         this.numeroConvenio = numeroConvenio;
         this.numeroCarteira = numeroCarteira;
         this.numeroVariacaoCarteira = numeroVariacaoCarteira;
@@ -54,6 +58,10 @@ public class CobrancaInput {
         this.numeroTituloCliente = numeroTituloCliente;
         this.textoMensagemBloqueioOcorrencia = textoMensagemBloqueioOcorrencia;
         this.indicadorPix = indicadorPix;
+        this.desconto = desconto;
+        this.jurosMora = jurosMora;
+        this.multa = multa;
+        this.pagador = pagador;
     }
 
     public CobrancaInput() {
@@ -225,6 +233,46 @@ public class CobrancaInput {
 
     public void setIndicadorPix(String indicadorPix) {
         this.indicadorPix = indicadorPix;
+    }
+
+    public String getNumeroTituloBeneficiario() {
+        return numeroTituloBeneficiario;
+    }
+
+    public void setNumeroTituloBeneficiario(String numeroTituloBeneficiario) {
+        this.numeroTituloBeneficiario = numeroTituloBeneficiario;
+    }
+
+    public DescontoInput getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(DescontoInput desconto) {
+        this.desconto = desconto;
+    }
+
+    public JurosInput getJurosMora() {
+        return jurosMora;
+    }
+
+    public void setJurosMora(JurosInput jurosMora) {
+        this.jurosMora = jurosMora;
+    }
+
+    public MultaInput getMulta() {
+        return multa;
+    }
+
+    public void setMulta(MultaInput multa) {
+        this.multa = multa;
+    }
+
+    public PagadorInput getPagador() {
+        return pagador;
+    }
+
+    public void setPagador(PagadorInput pagador) {
+        this.pagador = pagador;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.boletos.Gerenciar.ENTITY;
 
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Endereco;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,7 +24,13 @@ public class UsuarioEntity implements Serializable {
     private String nome;
     private String email;
     private String telefone;
+    private String documento;
+    private boolean pessoaFisica;
     private boolean status;
+
+    @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
+    private Endereco endereco;
 
     @OneToOne(mappedBy = "usuario")
     @JsonIgnore
@@ -94,12 +101,36 @@ public class UsuarioEntity implements Serializable {
         this.loginEntity = loginEntity;
     }
 
-    public List<Fatura> getContas() {
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public boolean isPessoaFisica() {
+        return pessoaFisica;
+    }
+
+    public void setPessoaFisica(boolean pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Fatura> getFaturas() {
         return faturas;
     }
 
-    public void setFaturas(List<Fatura> contas) {
-        this.faturas = contas;
+    public void setFaturas(List<Fatura> faturas) {
+        this.faturas = faturas;
     }
 
     @Override

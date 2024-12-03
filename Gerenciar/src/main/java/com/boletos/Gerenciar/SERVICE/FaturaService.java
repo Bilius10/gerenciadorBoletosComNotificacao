@@ -1,18 +1,17 @@
 package com.boletos.Gerenciar.SERVICE;
 
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
-import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
-import com.boletos.Gerenciar.EXCEPTIONS.RegraNegocioException;
-import com.boletos.Gerenciar.INFRA.CobrancaInput;
+import com.boletos.Gerenciar.INFRA.GeradorBoleto.*;
 import com.boletos.Gerenciar.REPOSITORY.FaturaRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;
+import com.boletos.Gerenciar.UTIL.Normalizador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class FaturaService {
@@ -21,6 +20,8 @@ public class FaturaService {
     private FaturaRepository faturaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private AccessTokenController accessTokenController;
 
     public CobrancaInput transformarFaturaEmCobranca(int faturaId){
         Optional<Fatura> byId = faturaRepository.findById(faturaId);
@@ -30,7 +31,33 @@ public class FaturaService {
 
     public CobrancaInput criar(Fatura fatura){
 
+        System.out.println(accessTokenController.requisitarToken(null, null));
         CobrancaInput cobrancaInput = new CobrancaInput();
+
+        DescontoInput descontoInput = new DescontoInput();
+        descontoInput.setTipo(0);
+
+        JurosInput jurosInput = new JurosInput();
+        jurosInput.setTipo(2);
+        jurosInput.setPorcentagem(fatura.getConvenio().getJurosPorcentagem());
+        jurosInput.setValor(BigDecimal.ZERO);
+
+        MultaInput multaInput = new MultaInput();
+        multaInput.setTipo(2);
+        multaInput.setData(String.valueOf(fatura.getDataVencimento().plusDays(1)));
+        multaInput.setPorcentagem(fatura.getConvenio().getMultaPorcentagem());
+        multaInput.setValor(BigDecimal.ZERO);
+
+        PagadorInput pagadorInput = new PagadorInput();
+        pagadorInput.setTipoInscricao(fatura.getUsuarioEntity().isPessoaFisica() ? 1:2);
+        pagadorInput.setNumeroInscricao(Long.valueOf(String.valueOf(fatura.getUsuarioEntity().getDocumento())));
+        pagadorInput.setNome(Normalizador.norm(fatura.getUsuarioEntity().getNome()));
+        pagadorInput.setCep(Long.valueOf(fatura.getUsuarioEntity().getEndereco().getCep()));
+        pagadorInput.setCidade(Normalizador.norm(fatura.getUsuarioEntity().getEndereco().getCidade()));
+        pagadorInput.setBairro(Normalizador.abreviar(Normalizador.norm(fatura.getUsuarioEntity().getEndereco().getBairro())));
+        pagadorInput.setUf(fatura.getUsuarioEntity().getEndereco().getUf());
+        pagadorInput.setEndereco(Normalizador.criarEnderecoCompleto((fatura.getUsuarioEntity()), 40));
+
         cobrancaInput.setNumeroConvenio((long) fatura.getConvenio().getIdConvenio());
         cobrancaInput.setNumeroCarteira(Integer.valueOf(fatura.getConvenio().getCarteira()));
         cobrancaInput.setNumeroVariacaoCarteira(Integer.valueOf(fatura.getConvenio().getVariacaoCarteira()));
@@ -46,6 +73,10 @@ public class FaturaService {
         cobrancaInput.setNumeroTituloCliente(String.format("%010d", Long.valueOf(fatura.getConvenio().getNumeroContrato()
                 .concat(String.format("%010d", Long.valueOf(fatura.getNumeroDocumento()))))));
         cobrancaInput.setIndicadorPix("S");
+        cobrancaInput.setDesconto(descontoInput);
+        cobrancaInput.setJurosMora(jurosInput);
+        cobrancaInput.setMulta(multaInput);
+        cobrancaInput.setPagador(pagadorInput);
         return cobrancaInput;
 
     }
