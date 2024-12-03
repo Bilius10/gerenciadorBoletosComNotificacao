@@ -1,13 +1,19 @@
 package com.boletos.Gerenciar.ENTITY.GeradorBoleto;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Empresa {
 
@@ -26,63 +32,5 @@ public class Empresa {
     @UpdateTimestamp
     private LocalDateTime atualizado;
 
-    public Empresa(int idEmpresa, String razaoSocial, String cnpj, Endereco endereco, LocalDateTime criado, LocalDateTime atualizado) {
-        this.idEmpresa = idEmpresa;
-        this.razaoSocial = razaoSocial;
-        this.cnpj = cnpj;
-        this.endereco = endereco;
-        this.criado = criado;
-        this.atualizado = atualizado;
-    }
 
-    public Empresa() {
-    }
-
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public LocalDateTime getCriado() {
-        return criado;
-    }
-
-    public void setCriado(LocalDateTime criado) {
-        this.criado = criado;
-    }
-
-    public LocalDateTime getAtualizado() {
-        return atualizado;
-    }
-
-    public void setAtualizado(LocalDateTime atualizado) {
-        this.atualizado = atualizado;
-    }
-
-    public void setIdEmpresa(int idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    public int getIdEmpresa() {
-        return idEmpresa;
-    }
 }

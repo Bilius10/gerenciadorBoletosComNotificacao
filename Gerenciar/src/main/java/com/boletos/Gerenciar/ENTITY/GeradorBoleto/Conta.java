@@ -1,12 +1,19 @@
 package com.boletos.Gerenciar.ENTITY.GeradorBoleto;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Conta {
 
@@ -32,91 +39,5 @@ public class Conta {
     @JoinColumn(name = "idEmpresa_Empresa", nullable = false)
     private Empresa empresa;
 
-    public Conta(int idConta, String agencia, String conta, String digitoAgencia,
-                 String digitoConta, LocalDateTime criado, LocalDateTime atualizado, Banco banco, Empresa empresa) {
-        this.idConta = idConta;
-        this.agencia = agencia;
-        this.conta = conta;
-        this.digitoAgencia = digitoAgencia;
-        this.digitoConta = digitoConta;
-        this.criado = criado;
-        this.atualizado = atualizado;
-        this.banco = banco;
-        this.empresa = empresa;
-    }
 
-    public Conta() {
-    }
-
-    public String getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
-
-    public String getConta() {
-        return conta;
-    }
-
-    public void setConta(String conta) {
-        this.conta = conta;
-    }
-
-    public String getDigitoAgencia() {
-        return digitoAgencia;
-    }
-
-    public void setDigitoAgencia(String digitoAgencia) {
-        this.digitoAgencia = digitoAgencia;
-    }
-
-    public String getDigitoConta() {
-        return digitoConta;
-    }
-
-    public void setDigitoConta(String digitoConta) {
-        this.digitoConta = digitoConta;
-    }
-
-    public LocalDateTime getCriado() {
-        return criado;
-    }
-
-    public void setCriado(LocalDateTime criado) {
-        this.criado = criado;
-    }
-
-    public LocalDateTime getAtualizado() {
-        return atualizado;
-    }
-
-    public void setAtualizado(LocalDateTime atualizado) {
-        this.atualizado = atualizado;
-    }
-
-    public Banco getBanco() {
-        return banco;
-    }
-
-    public void setBanco(Banco banco) {
-        this.banco = banco;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public void setIdConta(int idConta) {
-        this.idConta = idConta;
-    }
-
-    public int getIdConta() {
-        return idConta;
-    }
 }

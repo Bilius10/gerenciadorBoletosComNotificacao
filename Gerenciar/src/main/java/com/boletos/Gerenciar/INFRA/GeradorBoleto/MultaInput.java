@@ -1,7 +1,16 @@
 package com.boletos.Gerenciar.INFRA.GeradorBoleto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MultaInput {
 
     private Integer tipo;
@@ -9,45 +18,5 @@ public class MultaInput {
     private BigDecimal porcentagem;
     private BigDecimal valor;
 
-    public MultaInput(Integer tipo, String data, BigDecimal porcentagem, BigDecimal valor) {
-        this.tipo = tipo;
-        this.data = data;
-        this.porcentagem = porcentagem;
-        this.valor = valor;
-    }
 
-    public MultaInput() {
-    }
-
-    public Integer getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public BigDecimal getPorcentagem() {
-        return porcentagem;
-    }
-
-    public void setPorcentagem(BigDecimal porcentagem) {
-        this.porcentagem = porcentagem;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
 }

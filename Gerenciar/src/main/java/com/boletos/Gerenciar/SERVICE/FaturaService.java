@@ -24,6 +24,10 @@ public class FaturaService {
     private AccessTokenController accessTokenController;
 
     public CobrancaInput transformarFaturaEmCobranca(int faturaId){
+
+        System.out.println(accessTokenController.requisitarToken("eyJpZCI6IjQxODM2ZDMtODY0OC00NDRkLWI5ODkiLCJjb2RpZ29QdWJsaWNhZG9yIjowLCJjb2RpZ29Tb2Z0d2FyZSI6MTE4NDQzLCJzZXF1ZW5jaWFsSW5zdGFsYWNhbyI6MX0",
+                "eyJpZCI6IjFjZWFjNzUtOTUiLCJjb2RpZ29QdWJsaWNhZG9yIjowLCJjb2RpZ29Tb2Z0d2FyZSI6MTE4NDQzLCJzZXF1ZW5jaWFsSW5zdGFsYWNhbyI6MSwic2VxdWVuY2lhbENyZWRlbmNpYWwiOjEsImFtYmllbnRlIjoiaG9tb2xvZ2FjYW8iLCJpYXQiOjE3MzMxODMxOTYyMzJ9"));
+
         Optional<Fatura> byId = faturaRepository.findById(faturaId);
 
         return criar(byId.get());
@@ -31,7 +35,6 @@ public class FaturaService {
 
     public CobrancaInput criar(Fatura fatura){
 
-        System.out.println(accessTokenController.requisitarToken(null, null));
         CobrancaInput cobrancaInput = new CobrancaInput();
 
         DescontoInput descontoInput = new DescontoInput();
@@ -69,7 +72,7 @@ public class FaturaService {
         cobrancaInput.setCodigoTipoTitulo(2);
         cobrancaInput.setDescricaoTipoTitulo("Duplicata Mercantil");
         cobrancaInput.setIndicadorPermissaoRecebimentoParcial("N");
-        cobrancaInput.setNomeTituloBeneficiario(fatura.getNumeroDocumento());
+        cobrancaInput.setNumeroTituloBeneficiario(fatura.getNumeroDocumento());
         cobrancaInput.setNumeroTituloCliente(String.format("%010d", Long.valueOf(fatura.getConvenio().getNumeroContrato()
                 .concat(String.format("%010d", Long.valueOf(fatura.getNumeroDocumento()))))));
         cobrancaInput.setIndicadorPix("S");

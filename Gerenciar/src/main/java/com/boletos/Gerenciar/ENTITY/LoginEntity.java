@@ -2,6 +2,10 @@ package com.boletos.Gerenciar.ENTITY;
 
 import com.boletos.Gerenciar.ENUM.nivelGerencimento;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +14,10 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 @Table(name = "login")
 public class LoginEntity implements UserDetails, Serializable {
@@ -38,13 +44,6 @@ public class LoginEntity implements UserDetails, Serializable {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public LoginEntity(int idLogin, String nome, String senha, UsuarioEntity usuario) {
-        this.idLogin = idLogin;
-        this.nome = nome;
-        this.senha = senha;
-        this.usuario = usuario;
-    }
-
     public LoginEntity() {
 
         this.accountNonExpired = true;
@@ -52,55 +51,6 @@ public class LoginEntity implements UserDetails, Serializable {
         this.enabled = true;
         this.credentialsNonExpired = true;
         this.nivelGerencimento = com.boletos.Gerenciar.ENUM.nivelGerencimento.PAGADOR;
-    }
-
-    public com.boletos.Gerenciar.ENUM.nivelGerencimento getNivelGerencimento() {
-        return nivelGerencimento;
-    }
-
-    public void setNivelGerencimento(com.boletos.Gerenciar.ENUM.nivelGerencimento nivelGerencimento) {
-        this.nivelGerencimento = nivelGerencimento;
-    }
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     @Override
@@ -146,13 +96,6 @@ public class LoginEntity implements UserDetails, Serializable {
         return enabled;
     }
 
-    public void setIdLogin(int idLogin) {
-        this.idLogin = idLogin;
-    }
-
-    public int getIdLogin() {
-        return idLogin;
-    }
 
     @Override
     public String toString() {
