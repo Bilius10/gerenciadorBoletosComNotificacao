@@ -1,12 +1,18 @@
 package com.boletos.Gerenciar.SERVICE;
 
+import com.boletos.Gerenciar.CONTROLLER.CobrancaController;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.BoletoRegistrado;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.CobrancaModel;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.FaturaRegistrada;
 import com.boletos.Gerenciar.INFRA.GeradorBoleto.*;
+import com.boletos.Gerenciar.REPOSITORY.FaturaRegistradaRepository;
 import com.boletos.Gerenciar.REPOSITORY.FaturaRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;
 import com.boletos.Gerenciar.UTIL.Normalizador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,6 +28,24 @@ public class FaturaService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private AccessTokenController accessTokenController;
+    @Autowired
+    private CobrancaController cobrancaController;
+    @Autowired
+    private FaturaRegistradaRepository faturaRegistradaRepository;
+
+    @Transactional
+    public BoletoRegistrado registrarCobranca(int faturaId, CobrancaModel cobrancaModel){
+        var token = accessTokenController.requisitarToken(cobrancaModel.getClientId(), cobrancaModel.getClientSecret());
+        var boletoRegistrado = cobrancaController.registrar(transformarFaturaEmCobranca(faturaId), token, cobrancaModel.getAppkey());
+
+        var fatura = faturaRepository.findById(faturaId);
+        fatura.get().setNossoNumero(boletoRegistrado.getNumero());
+        var faturaRegistrada = new FaturaRegistrada().criar(fatura.get(), boletoRegistrado.getLinhaDigitavel(),
+                boletoRegistrado.getQrCode().getUrl(), boletoRegistrado.getQrCode().getEmv());
+
+        faturaRegistradaRepository.save(faturaRegistrada);
+        return boletoRegistrado;
+    }
 
     public CobrancaInput transformarFaturaEmCobranca(int faturaId){
 

@@ -1,6 +1,5 @@
 package com.boletos.Gerenciar.ENTITY.GeradorBoleto;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

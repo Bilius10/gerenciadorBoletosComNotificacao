@@ -1,5 +1,7 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.BoletoRegistrado;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.CobrancaModel;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.boletos.Gerenciar.SERVICE.FaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +37,9 @@ public class FaturaController {
         return ResponseEntity.status(HttpStatus.OK).body(contaBuscada);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deletarConta(@PathVariable int id){
-
-        Optional<Fatura> contaDeletada = faturaService.deletarConta(id);
-
-        if(contaDeletada.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não encontrada");
-        }
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Conta excluida");
+    @PostMapping("{faturaId}")
+    public ResponseEntity<BoletoRegistrado> registrar(@PathVariable int faturaId, @RequestBody CobrancaModel model){
+        return ResponseEntity.status(HttpStatus.CREATED).body(faturaService.registrarCobranca(faturaId, model));
     }
 
 
