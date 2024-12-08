@@ -1,6 +1,6 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.BoletoRegistrado;
+import com.boletos.Gerenciar.DTO.GeradorBoleto.BoletoRegistradoDTO;
 import com.boletos.Gerenciar.INFRA.GeradorBoleto.CobrancaInput;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +15,7 @@ public class CobrancaController {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public BoletoRegistrado registrar(CobrancaInput cobranca, String token, String key){
+    public BoletoRegistradoDTO registrar(CobrancaInput cobranca, String token, String key){
         URI url = URI.create("https://oauth.hm.bb.com.br/oauth/token");
         var uriBuilder = UriComponentsBuilder.fromUri(url);
         uriBuilder.queryParam("gw-dev-app-key", key);
@@ -25,7 +25,7 @@ public class CobrancaController {
 
         var request = new HttpEntity<>(cobranca, headers);
 
-        var response = restTemplate.postForObject(uriBuilder.build().toUri(), request, BoletoRegistrado.class);
+        var response = restTemplate.postForObject(uriBuilder.build().toUri(), request, BoletoRegistradoDTO.class);
 
         return response;
     }

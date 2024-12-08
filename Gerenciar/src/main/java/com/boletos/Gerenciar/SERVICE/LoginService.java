@@ -2,7 +2,7 @@ package com.boletos.Gerenciar.SERVICE;
 
 import com.boletos.Gerenciar.ENTITY.LoginEntity;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
-import com.boletos.Gerenciar.INFRA.TokenService;
+import com.boletos.Gerenciar.INFRA.SecurityAcess.TokenService;
 import com.boletos.Gerenciar.PRODUCER.EmailProducer;
 import com.boletos.Gerenciar.REPOSITORY.LoginRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;

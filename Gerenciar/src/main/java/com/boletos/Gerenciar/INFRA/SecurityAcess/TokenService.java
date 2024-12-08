@@ -1,4 +1,4 @@
-package com.boletos.Gerenciar.INFRA;
+package com.boletos.Gerenciar.INFRA.SecurityAcess;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,8 +1,8 @@
 package com.boletos.Gerenciar.SERVICE;
 
 import com.boletos.Gerenciar.CONTROLLER.CobrancaController;
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.BoletoRegistrado;
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.CobrancaModel;
+import com.boletos.Gerenciar.DTO.GeradorBoleto.BoletoRegistradoDTO;
+import com.boletos.Gerenciar.DTO.GeradorBoleto.CobrancaDTO;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.FaturaRegistrada;
 import com.boletos.Gerenciar.INFRA.GeradorBoleto.*;
@@ -34,14 +34,14 @@ public class FaturaService {
     private FaturaRegistradaRepository faturaRegistradaRepository;
 
     @Transactional
-    public BoletoRegistrado registrarCobranca(int faturaId, CobrancaModel cobrancaModel){
-        var token = accessTokenController.requisitarToken(cobrancaModel.getClientId(), cobrancaModel.getClientSecret());
-        var boletoRegistrado = cobrancaController.registrar(transformarFaturaEmCobranca(faturaId), token, cobrancaModel.getAppkey());
+    public BoletoRegistradoDTO registrarCobranca(int faturaId, CobrancaDTO cobrancaModel){
+        var token = accessTokenController.requisitarToken(cobrancaModel.clientId(), cobrancaModel.clientSecret());
+        var boletoRegistrado = cobrancaController.registrar(transformarFaturaEmCobranca(faturaId), token, cobrancaModel.appkey());
 
         var fatura = faturaRepository.findById(faturaId);
-        fatura.get().setNossoNumero(boletoRegistrado.getNumero());
-        var faturaRegistrada = new FaturaRegistrada().criar(fatura.get(), boletoRegistrado.getLinhaDigitavel(),
-                boletoRegistrado.getQrCode().getUrl(), boletoRegistrado.getQrCode().getEmv());
+        fatura.get().setNossoNumero(boletoRegistrado.numero());
+        var faturaRegistrada = new FaturaRegistrada().criar(fatura.get(), boletoRegistrado.linhaDigitavel(),
+                boletoRegistrado.qrCode().url(), boletoRegistrado.qrCode().emv());
 
         faturaRegistradaRepository.save(faturaRegistrada);
         return boletoRegistrado;

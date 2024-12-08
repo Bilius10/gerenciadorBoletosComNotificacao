@@ -1,7 +1,7 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.BoletoRegistrado;
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.CobrancaModel;
+import com.boletos.Gerenciar.DTO.GeradorBoleto.BoletoRegistradoDTO;
+import com.boletos.Gerenciar.DTO.GeradorBoleto.CobrancaDTO;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
 import com.boletos.Gerenciar.SERVICE.FaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,8 @@ public class FaturaController {
     }
 
     @PostMapping("{faturaId}")
-    public ResponseEntity<BoletoRegistrado> registrar(@PathVariable int faturaId, @RequestBody CobrancaModel model){
-        return ResponseEntity.status(HttpStatus.CREATED).body(faturaService.registrarCobranca(faturaId, model));
+    public ResponseEntity<BoletoRegistradoDTO> registrar(@PathVariable int faturaId, @RequestBody CobrancaDTO cobranca){
+        return ResponseEntity.status(HttpStatus.CREATED).body(faturaService.registrarCobranca(faturaId, cobranca));
     }
 
 
