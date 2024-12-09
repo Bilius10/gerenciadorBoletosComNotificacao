@@ -3,44 +3,40 @@ package com.boletos.Gerenciar.CONTROLLER;
 import com.boletos.Gerenciar.DTO.GeradorBoleto.BoletoRegistradoDTO;
 import com.boletos.Gerenciar.DTO.GeradorBoleto.CobrancaDTO;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
+import com.boletos.Gerenciar.INFRA.GeradorBoleto.CobrancaInput;
 import com.boletos.Gerenciar.SERVICE.FaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/contas")
+@RequestMapping("/faturas")
 public class FaturaController {
 
     @Autowired
     private FaturaService faturaService;
 
-    @GetMapping
-    public ResponseEntity<List<Fatura>> buscarTodasContas(){
-        return ResponseEntity.status(HttpStatus.OK).body(faturaService.buscarTodasContas());
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<Object> buscarConta(@PathVariable int id){
-
-        Optional<Fatura> contaBuscada = faturaService.buscarConta(id);
-
-        if(contaBuscada.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Conta não encontrada");
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(contaBuscada);
+    @GetMapping("{faturaId}")
+    public CobrancaInput transformar(@PathVariable int faturaId) {
+        return faturaService.transformarFaturaEmCobranca(faturaId);
     }
 
     @PostMapping("{faturaId}")
-    public ResponseEntity<BoletoRegistradoDTO> registrar(@PathVariable int faturaId, @RequestBody CobrancaDTO cobranca){
-        return ResponseEntity.status(HttpStatus.CREATED).body(faturaService.registrarCobranca(faturaId, cobranca));
+    public BoletoRegistradoDTO registrar(@PathVariable int faturaId, @RequestBody CobrancaDTO model) {
+        return faturaService.registrarCobranca(faturaId, model);
     }
+
+    @GetMapping(path = "{faturaId}/boleto/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> gerarBoleto(@PathVariable int faturaId) {
+        byte[] bytesPdf = faturaService.gerar(faturaId);
+
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).body(bytesPdf);
+    }
+
+
 
 
 

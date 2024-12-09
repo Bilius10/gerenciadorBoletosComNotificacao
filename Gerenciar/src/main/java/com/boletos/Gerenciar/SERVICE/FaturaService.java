@@ -9,6 +9,7 @@ import com.boletos.Gerenciar.INFRA.GeradorBoleto.*;
 import com.boletos.Gerenciar.REPOSITORY.FaturaRegistradaRepository;
 import com.boletos.Gerenciar.REPOSITORY.FaturaRepository;
 import com.boletos.Gerenciar.REPOSITORY.UsuarioRepository;
+import com.boletos.Gerenciar.SERVICE.GeradorBoleto.GeradorBoletoService;
 import com.boletos.Gerenciar.UTIL.Normalizador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,15 @@ public class FaturaService {
     private CobrancaController cobrancaController;
     @Autowired
     private FaturaRegistradaRepository faturaRegistradaRepository;
+    @Autowired
+    private GeradorBoletoService geradorBoletoService;
+
+    public byte[] gerar(int faturaId){
+        var fatura = faturaRepository.findById(faturaId);
+        var cobranca = transformarFaturaEmCobranca(faturaId);
+
+        return geradorBoletoService.gerar(fatura.get(), cobranca);
+    }
 
     @Transactional
     public BoletoRegistradoDTO registrarCobranca(int faturaId, CobrancaDTO cobrancaModel){
