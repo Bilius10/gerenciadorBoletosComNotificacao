@@ -1,9 +1,9 @@
 package com.boletos.Gerenciar.ENTITY.GeradorBoleto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.boletos.Gerenciar.ENTITY.LoginEntity;
+import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +35,5 @@ public class Endereco {
     private LocalDateTime criado;
     @UpdateTimestamp
     private LocalDateTime atualizado;
-
 
 }

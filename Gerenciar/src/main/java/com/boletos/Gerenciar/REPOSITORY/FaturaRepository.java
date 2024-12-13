@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface FaturaRepository extends JpaRepository<Fatura, Integer> {
 
-    @Query("select f from Fatura f where f.usuarioEntity.idUsuario = :id")
-    List<Fatura> findByUsuario(Long id);
+    @Query("select f from Fatura f where f.usuario.idUsuario = :id")
+    List<Fatura> findByUsuario(int id);
 }

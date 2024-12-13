@@ -46,7 +46,7 @@ public class Fatura {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario_usuario", nullable = false)
-    private UsuarioEntity usuarioEntity;
+    private UsuarioEntity usuario;
 
     @OneToOne
     @JoinColumn(name = "idConvenio_Convenio", nullable = false)

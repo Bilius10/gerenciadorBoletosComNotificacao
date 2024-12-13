@@ -35,8 +35,8 @@ public class UsuarioEntity implements Serializable {
     private boolean pessoaFisica;
     private boolean status;
 
-    @OneToOne(mappedBy = "usuario")
-    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "idEndereco_Endereco", nullable = false)
     private Endereco endereco;
 
     @OneToOne(mappedBy = "usuario")

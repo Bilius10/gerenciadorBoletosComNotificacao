@@ -86,14 +86,14 @@ public class FaturaService {
         multaInput.setValor(BigDecimal.ZERO);
 
         PagadorInput pagadorInput = new PagadorInput();
-        pagadorInput.setTipoInscricao(fatura.getUsuarioEntity().isPessoaFisica() ? 1:2);
-        pagadorInput.setNumeroInscricao(Long.valueOf(String.valueOf(fatura.getUsuarioEntity().getDocumento())));
-        pagadorInput.setNome(Normalizador.norm(fatura.getUsuarioEntity().getNome()));
-        pagadorInput.setCep(Long.valueOf(fatura.getUsuarioEntity().getEndereco().getCep()));
-        pagadorInput.setCidade(Normalizador.norm(fatura.getUsuarioEntity().getEndereco().getCidade()));
-        pagadorInput.setBairro(Normalizador.abreviar(Normalizador.norm(fatura.getUsuarioEntity().getEndereco().getBairro())));
-        pagadorInput.setUf(fatura.getUsuarioEntity().getEndereco().getUf());
-        pagadorInput.setEndereco(Normalizador.criarEnderecoCompleto((fatura.getUsuarioEntity()), 40));
+        pagadorInput.setTipoInscricao(fatura.getUsuario().isPessoaFisica() ? 1:2);
+        pagadorInput.setNumeroInscricao(Long.valueOf(String.valueOf(fatura.getUsuario().getDocumento())));
+        pagadorInput.setNome(Normalizador.norm(fatura.getUsuario().getNome()));
+        pagadorInput.setCep(Long.valueOf(fatura.getUsuario().getEndereco().getCep()));
+        pagadorInput.setCidade(Normalizador.norm(fatura.getUsuario().getEndereco().getCidade()));
+        pagadorInput.setBairro(Normalizador.abreviar(Normalizador.norm(fatura.getUsuario().getEndereco().getBairro())));
+        pagadorInput.setUf(fatura.getUsuario().getEndereco().getUf());
+        pagadorInput.setEndereco(Normalizador.criarEnderecoCompleto((fatura.getUsuario()), 40));
 
         cobrancaInput.setNumeroConvenio((long) fatura.getConvenio().getIdConvenio());
         cobrancaInput.setNumeroCarteira(Integer.valueOf(fatura.getConvenio().getCarteira()));

@@ -13,4 +13,22 @@ public class GerenciarApplication {
 	//https://youtu.be/hlKik_eQ6gw?si=Q3C9mfFUY3bONbPO
 	//boa sorte quando terminar isso e rodar kkk
 	//arrumar o dto de criação de um usuario
+
+	//{
+	//	"valor": 1500.00,
+	//		"dataVencimento": "2024-12-31",
+	//		"tipoPagamento": "boleto",
+	//		"situacaoPagamento": "nao paga",
+	//		"numeroDocumento": "123456789",
+	//		"nossoNumero": "987654321",
+	//		"conta": {
+	//	"idConta": 1
+	//},
+	//	"usuarioEntity": {
+	//	"idUsuario": 1
+	//},
+	//	"convenio": {
+	//	"idConvenio": 1
+	//}
+	//}
 }
