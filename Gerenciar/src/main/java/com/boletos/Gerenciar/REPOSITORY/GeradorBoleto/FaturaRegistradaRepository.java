@@ -1,4 +1,4 @@
-package com.boletos.Gerenciar.REPOSITORY;
+package com.boletos.Gerenciar.REPOSITORY.GeradorBoleto;
 
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.FaturaRegistrada;
 import org.springframework.data.jpa.repository.JpaRepository;

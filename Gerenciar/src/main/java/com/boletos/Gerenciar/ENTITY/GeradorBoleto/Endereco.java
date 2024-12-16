@@ -1,8 +1,5 @@
 package com.boletos.Gerenciar.ENTITY.GeradorBoleto;
 
-import com.boletos.Gerenciar.ENTITY.LoginEntity;
-import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

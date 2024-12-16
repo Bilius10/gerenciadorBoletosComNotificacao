@@ -2,7 +2,7 @@ package com.boletos.Gerenciar.INFRA.GeradorBoleto;
 
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Fatura;
-import com.boletos.Gerenciar.REPOSITORY.FaturaRegistradaRepository;
+import com.boletos.Gerenciar.REPOSITORY.GeradorBoleto.FaturaRegistradaRepository;
 import com.boletos.Gerenciar.SERVICE.GeradorBoleto.GeradorBoletoService;
 import com.boletos.Gerenciar.SERVICE.GeradorQrCode.GeradorQrCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
