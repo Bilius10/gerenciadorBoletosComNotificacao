@@ -1,11 +1,8 @@
 package com.boletos.Gerenciar.SERVICE.GeradorBoleto;
-
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Banco;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Endereco;
 import com.boletos.Gerenciar.REPOSITORY.GeradorBoleto.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

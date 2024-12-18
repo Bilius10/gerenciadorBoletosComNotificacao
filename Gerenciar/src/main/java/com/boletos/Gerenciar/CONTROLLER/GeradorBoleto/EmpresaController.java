@@ -45,17 +45,15 @@ public class EmpresaController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarEmpresa(@RequestBody CriarEmpresaDTO criarEmpresaDTO) throws RegraNegocioException {
-        try {
-            var empresaRecebeDTO = new Empresa();
+    public ResponseEntity<Object> criarEmpresa(@RequestBody CriarEmpresaDTO criarEmpresaDTO) {
 
-            BeanUtils.copyProperties(criarEmpresaDTO, empresaRecebeDTO);
+        var empresaRecebeDTO = new Empresa();
 
-            Empresa empresaCriada = empresaService.saveEmpresa(empresaRecebeDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(empresaCriada);
-        } catch (BeansException | RegraNegocioException b) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(b.getMessage());
-        }
+        BeanUtils.copyProperties(criarEmpresaDTO, empresaRecebeDTO);
+
+        Empresa empresaCriada = empresaService.saveEmpresa(empresaRecebeDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(empresaCriada);
+
     }
 
     @PutMapping

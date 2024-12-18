@@ -1,6 +1,5 @@
 package com.boletos.Gerenciar.SERVICE.GeradorBoleto;
 
-import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Banco;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Empresa;
 import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Endereco;
 import com.boletos.Gerenciar.EXCEPTIONS.RegraNegocioException;
@@ -31,19 +30,10 @@ public class EmpresaService {
 
     }
 
-    public Empresa saveEmpresa(Empresa empresa) throws RegraNegocioException{
+    public Empresa saveEmpresa(Empresa empresa) {
 
-        Optional<Endereco> enderecoExiste = enderecoRepository.findById(empresa.getEndereco().getIdEndereco());
-
-
-        if(enderecoExiste.isEmpty()){
-            throw new RegraNegocioException("ID do endereço incorreto");
-        }
-        Endereco enderecoEncontrado = enderecoExiste.get();
-
-        if(!empresa.getEndereco().equals(enderecoEncontrado)){
-            enderecoRepository.save(empresa.getEndereco());
-        }
+        Endereco enderecoSalvo = enderecoRepository.save(empresa.getEndereco());
+        empresa.setEndereco(enderecoSalvo);
 
         return empresaRepository.save(empresa);
     }
