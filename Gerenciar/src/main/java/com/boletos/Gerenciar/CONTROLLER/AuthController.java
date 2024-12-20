@@ -1,7 +1,9 @@
 package com.boletos.Gerenciar.CONTROLLER;
 
+import br.com.caelum.stella.boleto.Beneficiario;
 import com.boletos.Gerenciar.DTO.LoginDTO;
 import com.boletos.Gerenciar.DTO.RegistroDTO;
+import com.boletos.Gerenciar.ENTITY.GeradorBoleto.Endereco;
 import com.boletos.Gerenciar.ENTITY.LoginEntity;
 import com.boletos.Gerenciar.ENTITY.UsuarioEntity;
 import com.boletos.Gerenciar.SERVICE.LoginService;
@@ -24,9 +26,14 @@ public class AuthController {
     public ResponseEntity<String> registro(@RequestBody @Valid RegistroDTO registroDTO){
 
         LoginEntity loginTransfer = new LoginEntity();
-        BeanUtils.copyProperties(registroDTO, loginTransfer, "email", "telefone");
+        BeanUtils.copyProperties(registroDTO, loginTransfer, "email", "telefone", "endereco", "pessoaFisica", "documento");
+
         UsuarioEntity usuarioTransfer = new UsuarioEntity();
-        BeanUtils.copyProperties(registroDTO, usuarioTransfer, "senha");
+        BeanUtils.copyProperties(registroDTO, usuarioTransfer, "senha", "endereco");
+
+        Endereco enderecoTransfer = new Endereco();
+        BeanUtils.copyProperties(registroDTO, enderecoTransfer, "email", "telefone", "pessoaFisica", "documento", "senha");
+        usuarioTransfer.setEndereco(enderecoTransfer);
 
         Optional<LoginEntity> loginConfirmacao = loginService.registro(loginTransfer, usuarioTransfer);
 

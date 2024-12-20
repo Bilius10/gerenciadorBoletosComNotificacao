@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name = "login")
+@Table(name = "Login")
 public class LoginEntity implements UserDetails, Serializable {
 
     @Serial
